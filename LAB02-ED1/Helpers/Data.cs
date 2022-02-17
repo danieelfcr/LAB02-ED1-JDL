@@ -1,5 +1,6 @@
 ﻿
 using ClassLibrary01;
+using LAB02_ED1.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,11 +28,10 @@ namespace LAB02_ED1.Helpers
 
 
 
-        public GenericList<Player> Playerlist = new GenericList<Player>();
-        
-       
-       // Player newPlayer = new Player("James", "Clare", "Coach", 13.44, 57, "si");
-        
-       
+        public List<PlayerModel> Playerlist = new List<PlayerModel>
+        {
+            
+        };
+
     }
 }

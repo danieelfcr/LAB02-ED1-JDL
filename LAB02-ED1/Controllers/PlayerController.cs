@@ -2,6 +2,7 @@
 using LAB02_ED1.Helpers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using LAB02_ED1.Models;
 
 
 namespace LAB02_ED1.Controllers
@@ -21,13 +22,14 @@ namespace LAB02_ED1.Controllers
         // GET: PlayerController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var model = Data.Instance.Playerlist.Find(Player => Player.CreepScore == id);
+            return View(model);
         }
 
         // GET: PlayerController/Create
         public ActionResult Create()
         {
-            return View();
+            return View(new PlayerModel());
         }
 
         // POST: PlayerController/Create
@@ -37,6 +39,16 @@ namespace LAB02_ED1.Controllers
         {
             try
             {
+                PlayerModel.Save(new PlayerModel
+                {
+                    Name = collection["Name"],
+                    LastName = collection["LastName"],
+                    Role = collection["Role"],
+                    KDA = double.Parse(collection["KDA"]),
+                    CreepScore = int.Parse(collection["CreepScore"]),
+                    Team = collection["Team"]    
+                });
+
                 return RedirectToAction(nameof(Index));
             }
             catch
