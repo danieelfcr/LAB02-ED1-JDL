@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.Text;
 
+
 namespace ClassLibrary
 {
-    class PlayerList<T>
+    public class GenericList<T>
     {
-        Player<T> First;
-        Player<T> Last;
+        T First;
+        T Last;
 
-        public bool Insertion(Player<T> newPlayer)
+        public bool Insertion(T newPlayer)
         {
             if (First == null)
             {
@@ -19,14 +20,15 @@ namespace ClassLibrary
             }
             else
             {
-                Player<T> aux = First;
+                T aux = First;
 
-                while(aux != Last)
+                while(!EqualityComparer<T>.Default.Equals(aux, Last))
                 {
                     if (aux == null)
                     {
                         aux = newPlayer;
                         Last = aux;
+                        
                         return true;
                     }
                 }
