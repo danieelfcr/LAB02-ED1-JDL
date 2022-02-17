@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LAB02_ED1.Helpers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -23,5 +24,14 @@ namespace LAB02_ED1.Models
         public int CreepScore { get; set; }
         [Required]
         public string Team { get; set; }
+
+
+
+
+        public static void Save(PlayerModel model)
+        {
+            Data.Instance.Playerlist.Add(model);
+        }
+
     }
 }
