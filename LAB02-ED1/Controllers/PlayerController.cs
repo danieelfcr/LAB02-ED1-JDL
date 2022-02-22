@@ -21,9 +21,8 @@ namespace LAB02_ED1.Controllers
         // GET: PlayerController/Details/5
         public ActionResult Details(int id)
         {
-            
-            //var model = GenericList<Player>.GetInstance.find(typeof(Player), id);
-            return View();
+            var x = GenericList<Player>.GetInstance.Find(id);
+            return View(x.Data);
         }
 
         // GET: PlayerController/Create
@@ -84,7 +83,8 @@ namespace LAB02_ED1.Controllers
         // GET: PlayerController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var x = GenericList<Player>.GetInstance.Find(id);
+            return View(x.Data);
         }
 
         // POST: PlayerController/Delete/5
@@ -94,6 +94,7 @@ namespace LAB02_ED1.Controllers
         {
             try
             {
+
                 return RedirectToAction(nameof(Index));
             }
             catch
