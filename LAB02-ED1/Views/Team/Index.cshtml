@@ -1,4 +1,4 @@
-﻿@using System.IO;
+﻿
 
 @model IEnumerable<LAB02_ED1.Models.TeamModel>
 
@@ -13,29 +13,6 @@
     <input type="file" accept=".CSV" />
 
 
-    @{
-
-        var reader = new StreamReader(File.OpenRead(@"C:\Users\jmmr1\OneDrive\Escritorio\LOLTeams.CSV"));
-
-
-
-        while (!reader.EndOfStream)
-        {
-
-            var line = reader.ReadLine();
-            var values = line.Split(",");
-
-            TeamModel.Save(new TeamModel
-            {
-                TeamName = values[0],
-                Coach = values[1],
-                League = values[2],
-                DateCreation = Convert.ToDateTime(values[3]),
-                
-            });
-        }
-
-    }
 
 
 </p>

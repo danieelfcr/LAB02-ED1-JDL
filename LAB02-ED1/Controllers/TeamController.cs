@@ -1,9 +1,10 @@
-﻿using LAB02_ED1.Helpers;
+﻿
 using LAB02_ED1.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,9 +13,35 @@ namespace LAB02_ED1.Controllers
     public class TeamController : Controller
     {
         // GET: TeamController
+
         public ActionResult Index()
         {
-            return View(DataTeam.Instance.Teamlist);
+
+
+
+            /* var reader = new StreamReader(File.OpenRead(@"C:\Users\jmmr1\OneDrive\Escritorio\LOLTeams.CSV"));
+
+
+
+             while (!reader.EndOfStream)
+             {
+
+                 var line = reader.ReadLine();
+                 var values = line.Split(",");
+
+                 TeamModel.Save(new TeamModel
+                 {
+                     TeamName = values[0],
+                     Coach = values[1],
+                     League = values[2],
+                     DateCreation = Convert.ToDateTime(values[3]),
+
+                 });
+             }
+            */
+
+            //return View(DataTeam.Instance.Teamlist);
+            return View();
         }
 
         // GET: TeamController/Details/5
@@ -36,13 +63,14 @@ namespace LAB02_ED1.Controllers
         {
             try
             {
+                /*
                 TeamModel.Save(new TeamModel
                 {
                     TeamName = collection["TeamName"],
                     Coach = collection["Coach"],
                     League = collection["League"],
                     DateCreation = Convert.ToDateTime(collection["DateCreation"])
-                });
+                });*/
 
                 return RedirectToAction(nameof(Index));
             }

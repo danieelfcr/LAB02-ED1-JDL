@@ -1,5 +1,4 @@
 ﻿using ClassLibrary01;
-using LAB02_ED1.Helpers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using LAB02_ED1.Models;
@@ -16,20 +15,21 @@ namespace LAB02_ED1.Controllers
         public ActionResult Index()
         {
            
-            return View(Data.Instance.Playerlist);
+            return View(GenericList<Player>.GetInstance);
         }
 
         // GET: PlayerController/Details/5
         public ActionResult Details(int id)
         {
-            var model = Data.Instance.Playerlist.Find(Player => Player.CreepScore == id);
-            return View(model);
+            
+            //var model = GenericList<Player>.GetInstance.find(typeof(Player), id);
+            return View();
         }
 
         // GET: PlayerController/Create
         public ActionResult Create()
         {
-            return View(new PlayerModel());
+            return View(new Player());
         }
 
         // POST: PlayerController/Create
@@ -39,15 +39,17 @@ namespace LAB02_ED1.Controllers
         {
             try
             {
-                PlayerModel.Save(new PlayerModel
-                {
-                    Name = collection["Name"],
-                    LastName = collection["LastName"],
-                    Role = collection["Role"],
-                    KDA = double.Parse(collection["KDA"]),
-                    CreepScore = int.Parse(collection["CreepScore"]),
-                    Team = collection["Team"]    
-                });
+                Player player = new Player();
+                player.ID = GenericList<Player>.GetInstance.n;
+                player.Name = collection["Name"];
+                player.LastName = collection["LastName"];
+                player.Role = collection["Role"];
+                player.KDA = double.Parse(collection["KDA"]);
+                player.CreepScore = int.Parse(collection["CreepScore"]);
+                player.Team = collection["Team"];          
+                Node<Player> node = new Node<Player>(player);
+                node.NodeID = player.ID;
+                GenericList<Player>.GetInstance.Insert(node);
 
                 return RedirectToAction(nameof(Index));
             }
@@ -60,7 +62,8 @@ namespace LAB02_ED1.Controllers
         // GET: PlayerController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var x = GenericList<Player>.GetInstance.Find(id); 
+            return View(x.Data);
         }
 
         // POST: PlayerController/Edit/5

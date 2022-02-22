@@ -8,8 +8,8 @@ namespace ClassLibrary01
 {
     interface IGenericList<T>
     {
-        bool Insert(T newElement);
+        void Insert(Node<T> Node);
         bool Delete(int index);
-
+        //object Find(Func<T, bool> p);
     }
 }

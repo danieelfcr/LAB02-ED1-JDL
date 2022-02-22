@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ClassLibrary01
 {
-    public class Team<T>
+    public class Team
     {
         
         private string TeamName;
@@ -12,7 +12,6 @@ namespace ClassLibrary01
         private string League;
         private DateTime CreationDate;
 
-        public Team<T> Previous;
-        public Team<T> Next;
+        
     }
 }

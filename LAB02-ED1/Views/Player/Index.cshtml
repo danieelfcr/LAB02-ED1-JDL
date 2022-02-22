@@ -1,8 +1,4 @@
-﻿@using System.IO;
-
-
-@model IEnumerable<LAB02_ED1.Models.PlayerModel>
-
+﻿@model IEnumerable<ClassLibrary01.Player>
 
 @{
     ViewData["Title"] = "Index";
@@ -11,38 +7,14 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a> </br>
-    <input id="InputFile" type="file" accept=".CSV"/>
-    
-    
-    @{ 
-
-        var reader = new StreamReader(File.OpenRead(@"C:\Users\jmmr1\OneDrive\Escritorio\LOL.CSV"));
-
-
-
-        while (!reader.EndOfStream)
-        {
-
-            var line = reader.ReadLine();
-            var values = line.Split(",");
-            
-            PlayerModel.Save(new PlayerModel
-            {
-                Name = values[0],
-                LastName = values[1],
-                Role = values[2],
-                KDA = double.Parse(values[3]),
-                CreepScore = int.Parse(values[4]),
-                Team = values[5]
-            });
-        }
-
-    }
+    <a asp-action="Create">Create New</a>
 </p>
 <table class="table">
-    <thead>
+    <thead class="bg-dark text-white">
         <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
@@ -65,36 +37,35 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LastName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Role)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.KDA)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CreepScore)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Team)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.CreepScore }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.CreepScore }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.CreepScore })
-                </td>
-            </tr>
-
-        }
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Role)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KDA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreepScore)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Team)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {id=item.ID}) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+}
     </tbody>
-
 </table>
- 
