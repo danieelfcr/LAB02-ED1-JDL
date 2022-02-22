@@ -1,4 +1,4 @@
-﻿using LAB02_ED1.Helpers;
+﻿
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -23,9 +23,6 @@ namespace LAB02_ED1.Models
         
 
 
-        public static void Save(TeamModel model)
-        {
-            DataTeam.Instance.Teamlist.Add(model);
-        }
+        
     }
 }
