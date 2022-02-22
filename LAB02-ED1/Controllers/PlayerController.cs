@@ -94,6 +94,7 @@ namespace LAB02_ED1.Controllers
         {
             try
             {
+                var x = GenericList<Player>.GetInstance.Find(id);
 
                 return RedirectToAction(nameof(Index));
             }
