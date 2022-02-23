@@ -2,9 +2,31 @@
 
 @{
     ViewData["Title"] = "Index";
+    
 }
 
-<h1>Index</h1>
+<h1>Players</h1>
+
+<form  asp-controller="Player" asp-action="Index"  method="post" enctype="multipart/form-data" >
+    <input  type="file" name="File" accept=".CSV" /> <br/> <br/>
+    <input  class="btn-info text-white"  type="submit" value="Import player list" />
+</form>
+<br/><br/>
+
+<form asp-controller="Player" asp-action="Filter" method="post" enctype="multipart/form-data">
+    <select name="FilterSelection">
+        <option value="Name" selected>Name</option>
+        <option value="LastName">LastName</option>
+        <option value="Role">Role</option>
+        <option value="KDA">KDA</option>
+        <option value="CreepScore">Creep Score</option>
+        <option value="Team">Team</option>
+    </select>
+    <input type="text" name="Search" />
+    <input class="btn-info text-white" type="submit" value="Search" />
+</form>
+
+
 
 <p>
     <a asp-action="Create">Create New</a>

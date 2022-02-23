@@ -4,7 +4,13 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Teams</h1>
+
+<form asp-controller="Team" asp-action="Index" method="post" enctype="multipart/form-data">
+    <input type="file" name="File" accept=".CSV" /> <br /> <br />
+    <input class="btn-info text-white" type="submit" value="Import team list" />
+</form>
+
 
 <p>
     <a asp-action="Create">Create New</a>

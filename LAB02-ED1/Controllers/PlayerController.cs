@@ -2,6 +2,9 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using LAB02_ED1.Models;
+using System.Data;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
 
 
 namespace LAB02_ED1.Controllers
@@ -12,11 +15,81 @@ namespace LAB02_ED1.Controllers
         //public static GenericList<Player> playerList = new GenericList<Player>();
 
         // GET: PlayerController
+
+        private IWebHostEnvironment Environment;
+        public PlayerController(IWebHostEnvironment _environment)
+        {
+            Environment = _environment;
+        }
+
+
+
         public ActionResult Index()
         {
            
             return View(GenericList<Player>.GetInstance);
         }
+
+        [HttpPost]
+        public ActionResult Index(IFormFile File)
+        {
+            if (File != null)
+            {
+                string path = Path.Combine(this.Environment.WebRootPath, "Uploads");
+                
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+
+                string FileName = Path.GetFileName(File.FileName);
+                string filePath = Path.Combine(path, FileName);
+                FileStream stream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+                
+                    
+
+                string DataList = System.IO.File.ReadAllText(filePath);
+
+                DataList.Trim();
+                StreamReader read = new StreamReader(filePath);
+
+                try
+                {
+                    string line = "";
+                    while ((line = read.ReadLine()) != null)
+                    {
+                        string[] aux = line.Split(",");
+                        Player player = new Player();
+                        player.ID = GenericList<Player>.GetInstance.n;
+                        player.Name = aux[0];
+                        player.LastName = aux[1];
+                        player.Role = aux[2];
+                        player.KDA = double.Parse(aux[3]);
+                        player.CreepScore = int.Parse(aux[4]);
+                        player.Team = aux[5];
+                        Node<Player> node = new Node<Player>(player);
+                        node.NodeID = player.ID;
+                        GenericList<Player>.GetInstance.Insert(node);
+                    }
+                }
+                catch
+                {
+
+                }
+
+            }
+            return View(GenericList<Player>.GetInstance);
+        }
+
+
+        [HttpPost]
+        public ActionResult Filter(string FilterSelection, string Search)
+        {
+
+            return RedirectToAction(nameof(Index));
+        }
+
+
 
         // GET: PlayerController/Details/5
         public ActionResult Details(int id)
