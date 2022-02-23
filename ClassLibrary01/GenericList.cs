@@ -71,10 +71,7 @@ namespace ClassLibrary01
             
         }
 
-        public bool Delete(int index)
-        {
-            return true;
-        }
+        
 
         public Node<T> Find(int ID)
         {
@@ -90,7 +87,49 @@ namespace ClassLibrary01
             }
             return null;
         }
-       
+
+
+        public void Delete(int ID)
+        {
+            var Node = First;
+            while (Node != null)
+            { 
+                if (Node.NodeID == ID)
+                {
+                    if (Node == First)
+                    {
+                        First = First.next;
+                    }
+                    else if (Node == Last)
+                    {
+                        Last = Last.previous;
+                        Last.next = null;
+                    }
+                    else
+                    {
+                        Node.previous.next = Node.next;
+                        Node.next.previous = Node.previous;
+                    }
+                }
+                Node = Node.next;
+            }
+        }
+
+        public void Edit(int id, Node<T> model)
+        {
+            var Node = First;
+            while (Node != null)
+            {
+                if (Node.NodeID == id)
+                {
+                    model.next = Node.next;
+                    model.previous = Node.previous;
+                    Node = model;
+                    break;
+                }
+                Node = Node.next;
+            }
+        }
 
         public IEnumerator<T> GetEnumerator()
         {
@@ -108,6 +147,6 @@ namespace ClassLibrary01
             return this.GetEnumerator();
         }
 
-        
+      
     }
 }

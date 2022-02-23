@@ -9,7 +9,9 @@ namespace ClassLibrary01
     interface IGenericList<T>
     {
         void Insert(Node<T> Node);
-        bool Delete(int index);
-        //object Find(Func<T, bool> p);
+        void Delete(int index);
+        Node<T> Find(int index);
+        void Edit(int index, Node<T> model);
+        
     }
 }

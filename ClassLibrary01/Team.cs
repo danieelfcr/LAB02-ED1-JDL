@@ -6,12 +6,15 @@ namespace ClassLibrary01
 {
     public class Team
     {
-        
-        private string TeamName;
-        private string Coach;
-        private string League;
-        private DateTime CreationDate;
+        public int TeamID { get; set; }
+        public string TeamName { get; set; }
 
+        public string Coach { get; set; }
+
+        public  string League { get; set; }
+
+        public  DateTime CreationDate { get; set; }
         
+  
     }
 }
