@@ -72,6 +72,15 @@ namespace LAB02_ED1.Controllers
         {
             try
             {
+                var model = GenericList<Player>.GetInstance.Find(id);
+                model.Data.Name = collection["Name"];
+                model.Data.LastName = collection["LastName"];
+                model.Data.Role = collection["Role"];
+                model.Data.KDA = double.Parse(collection["KDA"]);
+                model.Data.CreepScore = int.Parse(collection["CreepScore"]);
+                model.Data.Team = collection["Team"];
+                GenericList<Player>.GetInstance.Edit(id, model);
+
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -94,7 +103,7 @@ namespace LAB02_ED1.Controllers
         {
             try
             {
-
+                GenericList<Player>.GetInstance.Delete(id);
                 return RedirectToAction(nameof(Index));
             }
             catch

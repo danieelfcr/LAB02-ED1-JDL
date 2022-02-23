@@ -1,6 +1,4 @@
-﻿
-
-@model IEnumerable<LAB02_ED1.Models.TeamModel>
+﻿@model IEnumerable<ClassLibrary01.Team>
 
 @{
     ViewData["Title"] = "Index";
@@ -10,15 +8,13 @@
 
 <p>
     <a asp-action="Create">Create New</a>
-    <input type="file" accept=".CSV" />
-
-
-
-
 </p>
 <table class="table">
     <thead>
-        <tr>
+        <tr class="bg-dark text-white">
+            <th>
+                @Html.DisplayNameFor(model => model.TeamID)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.TeamName)
             </th>
@@ -29,7 +25,7 @@
                 @Html.DisplayNameFor(model => model.League)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DateCreation)
+                @Html.DisplayNameFor(model => model.CreationDate)
             </th>
             <th></th>
         </tr>
@@ -37,6 +33,9 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TeamID)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TeamName)
             </td>
@@ -47,12 +46,12 @@
                 @Html.DisplayFor(modelItem => item.League)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DateCreation)
+                @Html.DisplayFor(modelItem => item.CreationDate)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new {/*id=item.Coach*/ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Edit", "Edit", new {id=item.TeamID}) |
+                @Html.ActionLink("Details", "Details", new { id = item.TeamID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.TeamID })
             </td>
         </tr>
 }
