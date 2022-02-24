@@ -7,6 +7,7 @@
 
 <h1>Players</h1>
 
+
 <form  asp-controller="Player" asp-action="Index"  method="post" enctype="multipart/form-data" >
     <input  type="file" name="File" accept=".CSV" /> <br/> <br/>
     <input  class="btn-info text-white"  type="submit" value="Import player list" />
@@ -26,11 +27,10 @@
     <input class="btn-info text-white" type="submit" value="Search" />
 </form>
 
-
-
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Create New</a><br> 
 </p>
+
 <table class="table">
     <thead class="bg-dark text-white">
         <tr>
