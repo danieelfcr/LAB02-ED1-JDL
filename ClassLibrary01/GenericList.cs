@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using System.Reflection;
 
 
 namespace ClassLibrary01
@@ -45,8 +46,8 @@ namespace ClassLibrary01
             }
         }
 
-        private Node<T> First;
-        private Node<T> Last;
+        public Node<T> First;
+        public Node<T> Last;
         public int n = 0;
 
         public void Insert(Node<T> node)
@@ -131,6 +132,68 @@ namespace ClassLibrary01
             }
         }
 
+        public GenericList<T> Filter(string filter, string Search)
+        {
+
+            GenericList<T> FilterResult = new GenericList<T>();
+
+            /*
+
+            var Node = First;
+            while (Node != null)
+            {
+                var aux = Node;
+                var properties = aux.Data.GetType().GetProperties();
+                var data = aux.Data;
+
+                Node = Node.next;
+                for (int i = 0; i < properties.Length; i++)
+                {
+                    if (properties[i].Name.Contains(filter))
+                    {
+                        
+                        
+                        //var help = fieldInfo[i].GetValue(aux);
+                        //if (aux.Data.GetType().get)
+                    }
+                }
+                
+            }*/
+            /*
+            if (typeof(T) == typeof(Player))
+            {
+                var Node = PlayerInstance.First;
+                
+                while (Node != null)
+                {
+                    var aux = Node;
+                    var properties = aux.Data.GetType().GetProperties();
+                    var data = aux.Data;
+
+                    Node = Node.next;
+                    for (int i = 0; i < properties.Length; i++)
+                    {
+                        if (properties[i].Name.Contains(filter))
+                        {
+
+
+                            //var help = fieldInfo[i].GetValue(aux);
+                            //if (aux.Data.GetType().get)
+                        }
+                    }
+                }
+            }*/
+
+
+
+
+
+
+                return PlayerInstance;
+            
+
+        }
+
         public IEnumerator<T> GetEnumerator()
         {
             var Node = First;
@@ -147,6 +210,6 @@ namespace ClassLibrary01
             return this.GetEnumerator();
         }
 
-      
+        
     }
 }

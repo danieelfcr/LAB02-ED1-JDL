@@ -12,6 +12,7 @@ namespace ClassLibrary01
         void Delete(int index);
         Node<T> Find(int index);
         void Edit(int index, Node<T> model);
-        
+
+        GenericList<T> Filter( string fileter, string Search);
     }
 }
