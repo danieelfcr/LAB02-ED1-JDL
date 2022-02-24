@@ -5,7 +5,8 @@ using LAB02_ED1.Models;
 using System.Data;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
-
+using System;
+using System.Collections.Generic;
 
 namespace LAB02_ED1.Controllers
 {
@@ -24,11 +25,22 @@ namespace LAB02_ED1.Controllers
 
 
 
-        public ActionResult Index()
+
+        public ActionResult Index(string search)
         {
-           
-            return View(GenericList<Player>.GetInstance);
+            if (search == null)
+            {
+                return View(GenericList<Player>.GetInstance);
+            }
+            else
+            {
+                return View();
+            }
+            
         }
+
+        
+   
 
         [HttpPost]
         public ActionResult Index(IFormFile File)
@@ -85,8 +97,89 @@ namespace LAB02_ED1.Controllers
         [HttpPost]
         public ActionResult Filter(string FilterSelection, string Search)
         {
+            LinkedList<Player> filteredList = new LinkedList<Player>();
 
-            return RedirectToAction(nameof(Index));
+            var Node = GenericList<Player>.GetInstance.First;
+
+            switch (FilterSelection)
+            {
+                
+                case "Name":
+                    Node = GenericList<Player>.GetInstance.First;
+                    while (Node != null)
+                    {
+                        if (Node.Data.Name == Search)
+                        {
+                            filteredList.AddLast(Node.Data);
+                        }
+                        
+                        Node = Node.next;
+                    }
+
+                    break;
+                case "LastName":
+                    Node = GenericList<Player>.GetInstance.First;
+                    while (Node != null)
+                    {
+                        if (Node.Data.LastName == Search)
+                        {
+                            filteredList.AddLast(Node.Data);
+                        }
+
+                        Node = Node.next;
+                    }
+                    break;
+                case "Role":
+                    Node = GenericList<Player>.GetInstance.First;
+                    while (Node != null)
+                    {
+                        if (Node.Data.Role == Search)
+                        {
+                            filteredList.AddLast(Node.Data);
+                        }
+
+                        Node = Node.next;
+                    }
+                    break;
+                case "KDA":
+                    Node = GenericList<Player>.GetInstance.First;
+                    while (Node != null)
+                    {
+                        if (Node.Data.KDA.ToString() == Search)
+                        {
+                            filteredList.AddLast(Node.Data);
+                        }
+
+                        Node = Node.next;
+                    }
+                    break;
+                case "CreepScore":
+                    Node = GenericList<Player>.GetInstance.First;
+                    while (Node != null)
+                    {
+                        if (Node.Data.CreepScore.ToString() == Search)
+                        {
+                            filteredList.AddLast(Node.Data);
+                        }
+
+                        Node = Node.next;
+                    }
+                    break;
+                case "Team":
+                    Node = GenericList<Player>.GetInstance.First;
+                    while (Node != null)
+                    {
+                        if (Node.Data.Team == Search)
+                        {
+                            filteredList.AddLast(Node.Data);
+                        }
+
+                        Node = Node.next;
+                    }
+                    break;
+            }
+
+            return View(filteredList);
         }
 
 
