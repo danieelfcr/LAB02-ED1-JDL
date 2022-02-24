@@ -79,6 +79,71 @@ namespace LAB02_ED1.Controllers
         }
 
 
+        [HttpPost]
+        public ActionResult Filter(string FilterSelection, string Search)
+        {
+            LinkedList<Team> filteredList = new LinkedList<Team>();
+
+            var Node = GenericList<Team>.GetInstance.First;
+
+            switch (FilterSelection)
+            {
+
+                case "TeamName":
+                    Node = GenericList<Team>.GetInstance.First;
+                    while (Node != null)
+                    {
+                        if (Node.Data.TeamName == Search)
+                        {
+                            filteredList.AddLast(Node.Data);
+                        }
+
+                        Node = Node.next;
+                    }
+
+                    break;
+                case "Coach":
+                    Node = GenericList<Team>.GetInstance.First;
+                    while (Node != null)
+                    {
+                        if (Node.Data.Coach == Search)
+                        {
+                            filteredList.AddLast(Node.Data);
+                        }
+
+                        Node = Node.next;
+                    }
+                    break;
+                case "League":
+                    Node = GenericList<Team>.GetInstance.First;
+                    while (Node != null)
+                    {
+                        if (Node.Data.League == Search)
+                        {
+                            filteredList.AddLast(Node.Data);
+                        }
+
+                        Node = Node.next;
+                    }
+                    break;
+                case "CreationDate":
+                    Node = GenericList<Team>.GetInstance.First;
+                    while (Node != null)
+                    {
+                        if (Node.Data.CreationDate.ToString().Contains(Search))
+                        {
+                            filteredList.AddLast(Node.Data);
+                        }
+
+                        Node = Node.next;
+                    }
+                    break;
+
+            }
+
+            return View(filteredList);
+        }
+
 
 
         // GET: TeamController/Details/5
@@ -162,7 +227,20 @@ namespace LAB02_ED1.Controllers
         {
             try
             {
+                
+
+                var Node = GenericList<Player>.GetInstance.First;
+                while (Node != null)
+                {
+                    if (Node.Data.Team == GenericList<Team>.GetInstance.Find(id).Data.TeamName)
+                    {
+                        GenericList<Player>.GetInstance.Delete(Node.Data.ID);
+                    }
+
+                    Node = Node.next;
+                }
                 GenericList<Team>.GetInstance.Delete(id);
+
                 return RedirectToAction(nameof(Index));
             }
             catch
