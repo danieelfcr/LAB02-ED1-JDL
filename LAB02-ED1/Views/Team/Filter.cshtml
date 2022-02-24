@@ -1,33 +1,14 @@
 ﻿@model IEnumerable<ClassLibrary01.Team>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Filter";
 }
 
-<h1>Teams</h1>
+<h1>Filter</h1>
 
-<form asp-controller="Team" asp-action="Index" method="post" enctype="multipart/form-data">
-    <input type="file" name="File" accept=".CSV" /> <br /> <br />
-    <input class="btn-info text-white" type="submit" value="Import team list" />
-</form>
-
-<form asp-controller="Team" asp-action="Filter" method="post" enctype="multipart/form-data">
-    <select name="FilterSelection">
-        <option value="TeamName" selected>TeamName</option>
-        <option value="Coach">Coach</option>
-        <option value="League">League</option>
-        <option value="CreationDate">Creation date</option>
-    </select>
-    <input type="text" name="Search" />
-    <input class="btn-info text-white" type="submit" value="Search" />
-</form>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
-        <tr class="bg-dark text-white">
+        <tr>
             <th>
                 @Html.DisplayNameFor(model => model.TeamID)
             </th>
